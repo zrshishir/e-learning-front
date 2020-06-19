@@ -9,7 +9,7 @@
       justify="center"
     >
       <v-col class="text-center" cols="12">
-        <h1 class="display-1 font-weight-thin mb-4">E-Learning</h1>
+        <h1 class="display-1 font-weight-medium mb-4">E-Learning</h1>
         <h4 class="subheading">Online education! Build your career at home!</h4>
       </v-col>
     </v-row>

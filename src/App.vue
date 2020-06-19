@@ -1,5 +1,5 @@
 <template>
-  <v-app id="inspire">
+  <v-app>
    <v-navigation-drawer
       v-model="drawerRight"
       app
@@ -25,8 +25,34 @@
       dark
     >
       <v-app-bar-nav-icon @click.stop="drawer = !drawer"></v-app-bar-nav-icon>
-      <v-toolbar-title>Toolbar</v-toolbar-title>
+      <v-toolbar-title>E-Learning</v-toolbar-title>
       <v-spacer></v-spacer>
+
+      <div v-for="(menu, i) in getMenus" :key="i" class="text-center">
+        <v-menu open-on-hover top offset-y>
+          <template v-slot:activator="{ on, attrs }">
+            <v-btn
+              color="blue darken-4"
+              dark
+              v-bind="attrs"
+              v-on="on"
+            >
+              {{menu.title}}
+            </v-btn>
+          </template>
+
+          <v-list>
+            <v-list-item
+              v-for="(item, index) in menu.items"
+              :key="index"
+              :to="item.link"
+            >
+              <v-list-item-title>{{ item.title }}</v-list-item-title>
+            </v-list-item>
+          </v-list>
+        </v-menu>
+      </div>
+
       <v-app-bar-nav-icon @click.stop="drawerRight = !drawerRight"></v-app-bar-nav-icon>
     </v-app-bar>
 
@@ -77,15 +103,27 @@
 </template>
 
 <script>
+import { mapGetters, mapActions } from 'vuex'
   export default {
-    props: {
-      source: String,
-    },
+    name: 'App',
     data: () => ({
       drawer: false,
       drawerRight: false,
       right: false,
       left: false,
+      items: [
+        { title: 'Click Me' },
+        { title: 'Click Me' },
+        { title: 'Click Me' },
+        { title: 'Click Me 2' },
+      ],
     }),
+
+    computed:{
+    ...mapGetters(['isLoggedIn', 'getMenus'])
+    }, 
+    methods: {
+      ...mapActions(['login', 'logout'])
+    }
   }
 </script>

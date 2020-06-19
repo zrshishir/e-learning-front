@@ -19,7 +19,7 @@ const getters = {
         if(! state.token){
             return [
                 {
-                    title: 'Login', items:[
+                    title: 'Authentication', items:[
                         {icon:'face', title: 'Sign up', link: '/signup'},
                         {icon: 'lock_open', title: 'Sign in', link: '/signin'}
                     ]
