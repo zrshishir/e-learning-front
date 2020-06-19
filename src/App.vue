@@ -1,60 +1,91 @@
 <template>
-        <v-card
-          class="mx-auto overflow-hidden"
-          height="400"
-        >
-          <v-app-bar
-            color="deep-purple"
-            dark
-          >
-            <v-app-bar-nav-icon @click="drawer = true"></v-app-bar-nav-icon>
+  <v-app id="inspire">
+   <v-navigation-drawer
+      v-model="drawerRight"
+      app
+      clipped
+      right
+    >
+       <v-list dense>
+        <v-list-item @click.stop="right = !right">
+          <v-list-item-action>
+            <v-icon>mdi-exit-to-app</v-icon>
+          </v-list-item-action>
+          <v-list-item-content>
+            <v-list-item-title>E-Learning</v-list-item-title>
+          </v-list-item-content>
+        </v-list-item>
+      </v-list>
+    </v-navigation-drawer>
 
-            <v-toolbar-title>Title</v-toolbar-title>
-            <v-spacer></v-spacer>
+    <v-app-bar
+      app
+      clipped-right
+      color="blue darken-4"
+      dark
+    >
+      <v-app-bar-nav-icon @click.stop="drawer = !drawer"></v-app-bar-nav-icon>
+      <v-toolbar-title>Toolbar</v-toolbar-title>
+      <v-spacer></v-spacer>
+      <v-app-bar-nav-icon @click.stop="drawerRight = !drawerRight"></v-app-bar-nav-icon>
+    </v-app-bar>
 
-            <router-link to="/">About</router-link>
-            <router-link to="/home">About</router-link>
-          </v-app-bar>
+    <v-navigation-drawer
+      v-model="drawer"
+      app
+    >
+      <v-list dense>
+        <v-list-item @click.stop="left = !left">
+          <v-list-item-action>
+            <v-icon>mdi-exit-to-app</v-icon>
+          </v-list-item-action>
+          <v-list-item-content>
+            <v-list-item-title>E-Learning</v-list-item-title>
+          </v-list-item-content>
+        </v-list-item>
+      </v-list>
+    </v-navigation-drawer>
 
-          <v-navigation-drawer
-            v-model="drawer"
-            absolute
-            temporary
-          >
-            <v-list
-              nav
-              dense
-            >
-              <v-list-item-group
-                v-model="group"
-                active-class="deep-purple--text text--accent-4"
-              >
-                <v-list-item>
-                  <v-list-item-icon>
-                    <v-icon>mdi-home</v-icon>
-                  </v-list-item-icon>
-                  <v-list-item-title>Home</v-list-item-title>
-                </v-list-item>
+    <v-main>
+      <v-container
+        class="fill-height"
+        fluid
+      >
+        
+          <router-view></router-view>
 
-                <v-list-item>
-                  <v-list-item-icon>
-                    <v-icon>mdi-account</v-icon>
-                  </v-list-item-icon>
-                  <v-list-item-title>Account</v-list-item-title>
-                </v-list-item>
+      </v-container>
+    </v-main>
 
-              </v-list-item-group>
-            </v-list>
-          </v-navigation-drawer>
-          <router-view/>
-        </v-card>
+    <v-navigation-drawer
+      v-model="right"
+      fixed
+      right
+      temporary
+    ></v-navigation-drawer>
+
+    <v-footer
+      app
+      color="blue darken-4"
+      class="white--text"
+    >
+      <span>zrshishir</span>
+      <v-spacer></v-spacer>
+      <span>&copy; 2020</span>
+    </v-footer>
+  </v-app>
 </template>
 
 <script>
   export default {
+    props: {
+      source: String,
+    },
     data: () => ({
       drawer: false,
+      drawerRight: false,
+      right: false,
+      left: false,
     }),
   }
 </script>
-
