@@ -1,7 +1,7 @@
 import axios from 'axios'
 
 
-const ROOT_URL = 'http://local.shadhin.com/api/shadhin';
+const ROOT_URL = 'http://e-learning.test/api';
 
 
 export default{

@@ -3,11 +3,12 @@ import router from '../../router'
 
 
 const state = {
-    token: window.localStorage.getItem('shadhin_token'),
+    token: window.localStorage.getItem('e-token'),
     error: "",
     errorStatus: "",
     successStatus: "",
     responseMsg: "",
+    userType: window.localStorage.getItem('userType'),
     test: ""
 };
 
@@ -25,11 +26,21 @@ const getters = {
                     ]
                 }
             ]
+        }else if( state.token && state.userType == 1){
+            return [
+                {
+                    title: 'Courses', items:[
+                        {icon:'face', title: 'Courses', link: '/course'},
+                        {icon:'', title: 'Lessons', link: '/lesson'},
+                        {icon:'', title: 'Question', link: '/question'}
+                    ]
+                },
+            ]
         }else{
             return [
                 {
-                    title: 'Profile', items:[
-                        {icon:'face', title: 'Update Password', link: '/update-password'},
+                    title: 'MCQ Test', items:[
+                        {icon:'face', title: 'MCQ Question', link: '/update-password'},
                         {icon:'', title: 'Profile2', link: ''},
                         {icon:'', title: 'Profile3', link: ''}
                     ]
@@ -57,7 +68,8 @@ const actions = {
             router.push('/signin')
         }else{
             commit('setToken', response)
-            window.localStorage.setItem('shadhin_token', response.data.data.users.api_token)
+            window.localStorage.setItem('e-token', response.data.data.users.api_token)
+            window.localStorage.setItem('userType', response.data.data.users.user_type_id)
             router.push('/')
         }
     },
@@ -69,16 +81,21 @@ const actions = {
          router.push('/signup')
         }else{
             commit('setToken', response)
-            window.localStorage .setItem('shadhin_token', response.data.data.users.api_token)
+            window.localStorage.setItem('e-token', response.data.data.users.api_token)
+            window.localStorage.setItem('userType', response.data.data.users.user_type_id)
             router.push('/')
         }
     },
 
     async logout({ commit }){ // we use commit instead of mutations there are several reasons for that. there might be several request  
         commit('setToken', "")
-        window.localStorage.removeItem('shadhin_token')
+        window.localStorage.removeItem('e-token')
         router.push('/')
     },
+
+    setErrorZero({commit}){
+        commit('setErrorToZero')
+    }
 };
 
 const mutations = {
@@ -89,6 +106,8 @@ const mutations = {
             state.token = response.data.data.users.api_token
             state.successStatus = response.statusCode
             state.responseMsg = response.errorMsg
+            state.test = response.data.data.users
+            state.userType = response.data.data.users.user_type_id
         }
        
     },
@@ -100,7 +119,11 @@ const mutations = {
         state.error = response.data.error
         state.errorStatus = response.data.statusCode
         state.responseMsg = response.data.errorMsg
-    }
+    },
+    setErrorToZero: (state) => {
+        state.error = 0
+        state.responseMsg = ""
+    },
 };
 
 export default {

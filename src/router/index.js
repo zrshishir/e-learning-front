@@ -4,6 +4,9 @@ import About from '../views/About.vue'
 import AuthHandler from '../views/auth/AuthHandler'
 import Signin from '../views/auth/Signin'
 import Signup from '../views/auth/Signup'
+import Course from '../views/course/Course'
+import Lesson from '../views/lesson/Lesson'
+import Question from '../views/question/Question'
 
 Vue.use(VueRouter)
 
@@ -13,6 +16,13 @@ Vue.use(VueRouter)
     { path: '/oauth2/callback', name: 'auth handler', component: AuthHandler},
     { path: '/signin', name: 'signin', component: Signin},
     { path: '/signup', name: 'signup', component: Signup},
+
+    //course
+    { path: '/course', name: 'Course', component: Course},
+    //lesson
+    { path: '/lesson', name: 'Lesson', component: Lesson},
+    //question
+    { path: '/question', name: 'Question', component: Question},
 ]
 
 const router = new VueRouter({

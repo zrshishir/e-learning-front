@@ -6,10 +6,6 @@ const state = {
     statusCode:'',
     errorMsg: '',
     indexData: [],
-    investorAgreement: '',
-    investeeAgreement: '',
-    docImage: '',
-    userImage: '',
     test: ''
 }
 
@@ -23,18 +19,7 @@ const getters = {
     errorMsg: (state) => {
         return state.errorMsg
     },
-    investeeAgreement: (state) => {
-        return state.investeeAgreement
-    },
-    investorAgreement: (state) => {
-        return state.investorAgreement
-    },
-    userImage: (state) => {
-        return state.userImage
-    },
-    docImage: (state) => {
-        return state.docImage
-    },
+    
     indexData: (state) => {
         return state.indexData
     },
@@ -94,10 +79,6 @@ const mutations = {
             state.statusCode = responseData.data.statusCode
             state.errorMsg = responseData.data.errorMsg
             state.indexData = responseData.data.data.pendingDetails
-            state.investorAgreement = responseData.data.data.investorAgreement
-            state.investeeAgreement = responseData.data.data.investeeAgreement
-            state.userImage = responseData.data.data.userImage
-            state.docImage = responseData.data.data.docImage
         }
     },
     setResponse: (state, responseData) => {
@@ -115,6 +96,7 @@ const mutations = {
     },
     setErrorToZero: (state) => {
         state.error = 0
+        state.responseMsg = ""
     },
     setTest: (state, credentials) => {
         state.test = credentials[0] + '/' + credentials[1] + credentials[2]

@@ -8,7 +8,7 @@
                         Login
                     </h5>
                 </v-layout>
-                <v-layout row wrap justify-center>
+                <v-layout v-if="getAuthSigninResponse" row wrap justify-center>
                     <v-alert
                       :value="getAuthSigninResponse"
                       type="warning"
@@ -28,13 +28,6 @@
                       label="E-mail"
                       required
                     ></v-text-field>
-
-                    <!-- <v-text-field
-                    v-model="allLogData.email"
-                    :rules="phoneRules"
-                    label="Mobile no"
-                    required
-                    ></v-text-field> -->
 
                     <v-text-field
                     v-model="allLogData.password"
@@ -112,9 +105,11 @@ import {mapGetters, mapActions} from 'vuex'
       },
       reset () {
         this.$refs.form.reset()
+        this.$store.dispatch('setErrorZero')
       },
       resetValidation () {
         this.$refs.form.resetValidation()
+        this.$store.dispatch('setErrorZero')
       }
     }
   }

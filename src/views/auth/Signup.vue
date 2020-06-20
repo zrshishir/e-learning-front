@@ -8,7 +8,7 @@
                         Registration
                     </h5>
                 </v-layout>
-                <v-layout row wrap justify-center>
+                <v-layout v-if="getAuthResponse" row wrap justify-center>
                     <v-alert
                       :value="getAuthResponse"
                       type="warning"
@@ -25,13 +25,6 @@
                         v-model="allFormData.name"
                         :rules="nameRules"
                         label="Name"
-                        required
-                      ></v-text-field>
-
-                     <v-text-field
-                        v-model="allFormData.phone"
-                        :rules="phoneRules"
-                        label="Phone"
                         required
                       ></v-text-field>
 
@@ -100,7 +93,6 @@ import {mapGetters, mapActions} from 'vuex'
       valid: true,
       allFormData: {
         name: '',
-        phone: '',
         email: '',
         password: null,
         password_confirmation: null
@@ -109,10 +101,6 @@ import {mapGetters, mapActions} from 'vuex'
       show1: false,
       nameRules: [
         v => !!v || 'Name is required'
-      ],
-      phoneRules: [
-        v => !!v || 'Phone is required',
-        v => (v && v.length == 11) || 'Should be 11 digits.'
       ],
       emailRules: [
         v => /.+.@.+/.test(v) || 'E-mail must be valid',
@@ -150,9 +138,11 @@ import {mapGetters, mapActions} from 'vuex'
       },
       reset () {
         this.$refs.form.reset()
+        this.$store.dispatch('setErrorZero')
       },
       resetValidation () {
         this.$refs.form.resetValidation()
+        this.$store.dispatch('setErrorZero')
       },
 
       ...mapActions(['register']),

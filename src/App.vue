@@ -25,7 +25,9 @@
       dark
     >
       <v-app-bar-nav-icon @click.stop="drawer = !drawer"></v-app-bar-nav-icon>
-      <v-toolbar-title>E-Learning</v-toolbar-title>
+      <v-toolbar-title>
+        <router-link color="white" to="/" tag="span" style="cursor:pointer; color:white">E-Learning</router-link>
+      </v-toolbar-title>
       <v-spacer></v-spacer>
 
       <div v-for="(menu, i) in getMenus" :key="i" class="text-center">
@@ -51,6 +53,9 @@
             </v-list-item>
           </v-list>
         </v-menu>
+        <v-btn class="hidden-sm-and-down floating" color="blue darken-4" v-if="isLoggedIn" @click="logout">
+          Signout
+        </v-btn>
       </div>
 
       <v-app-bar-nav-icon @click.stop="drawerRight = !drawerRight"></v-app-bar-nav-icon>
