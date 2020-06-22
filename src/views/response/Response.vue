@@ -86,6 +86,17 @@
             </v-container>
           </v-form>
         </template>
+        <v-container v-if="reportButtonView">
+          <v-row>
+            <v-col cols="12" md="3">
+                <div class="my-2">
+                  <v-btn color="primary" x-large to="/report">
+                      <v-icon>mdi-domain</v-icon>Show Result
+                  </v-btn>
+              </div>
+            </v-col>
+        </v-row>
+        </v-container>
     </v-container>
     <v-container v-else>
         <template>
@@ -123,6 +134,7 @@ import { mapGetters } from 'vuex'
   export default {
     data: () => ({
       dialog: false,
+      reportButtonView: false,
       apiUrl: 'response',
       alert:true,
       search: '',
@@ -189,7 +201,7 @@ import { mapGetters } from 'vuex'
       },
 
       getLesson () {
-        console.log(this.lessonId)
+        // console.log(this.lessonId)
         this.$store.dispatch('getLessonQuestion', ['question', this.lessonId])
       },
 
@@ -202,6 +214,9 @@ import { mapGetters } from 'vuex'
         const index = this.indexData.questions.indexOf(item)
         this.indexData.questions.splice(index, 1)
         this.$store.dispatch('responseUpdate', [this.apiUrl, this.editedItem])
+        if(this.indexData.questions.length === 0){
+          this.reportButtonView = true
+        }
       },
     },
   }

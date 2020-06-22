@@ -41,8 +41,8 @@ const getters = {
                 {
                     title: 'My Courses', items:[
                         {icon:'face', title: 'Course Choice', link: '/user-course'},
-                        {icon:'', title: 'MCQ Test', link: 'response'},
-                        {icon:'', title: 'My Result', link: ''}
+                        {icon:'', title: 'MCQ Test', link: '/response'},
+                        {icon:'', title: 'My Result', link: '/report'}
                     ]
                 },
             ]

@@ -1,5 +1,20 @@
 <template>
     <v-container v-if="isLoggedIn">
+        <template>
+          <v-row justify="center">
+            <v-dialog v-model="error" persistent max-width="500">
+              <v-card>
+                <v-card-title class="headline deep-orange">Access Warning</v-card-title>
+                <v-card-text>{{errorMsg}}</v-card-text>
+                <v-card-actions>
+                  <v-spacer></v-spacer>
+                  <v-btn color="deep-orange" text @click="setErrorZero">Cancel</v-btn>
+                </v-card-actions>
+              </v-card>
+            </v-dialog>
+          </v-row>
+        </template>
+
         <template v-if="! indexData">
             <v-data-table item-key="name" class="elevation-1" loading loading-text="Loading... Please wait"></v-data-table>
         </template>

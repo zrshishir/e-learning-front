@@ -9,6 +9,7 @@ import Lesson from '../views/lesson/Lesson'
 import Question from '../views/question/Question'
 import Response from '../views/response/Response'
 import UserCourse from '../views/user-course/UserCourse'
+import Report from '../views/report/Report'
 
 Vue.use(VueRouter)
 
@@ -31,6 +32,9 @@ Vue.use(VueRouter)
 
     //question
     { path: '/user-course', name: 'UserCourse', component: UserCourse},
+
+    //report
+    { path: '/report', name: 'Report', component: Report},
 ]
 
 const router = new VueRouter({
