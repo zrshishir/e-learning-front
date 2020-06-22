@@ -1,10 +1,16 @@
 <template>
     <v-container v-if="isLoggedIn">
       <template>
+        <v-alert type="error" v-if="error == 1">
+            {{errorMsg}}
+          </v-alert>
+          <v-alert type="success" v-if="error == 0">
+            {{errorMsg}}
+          </v-alert>
           <v-row justify="center">
-            <v-dialog v-model="error" persistent max-width="500">
+            <v-dialog v-if="error" persistent max-width="500">
               <v-card>
-                <v-card-title class="headline deep-orange">Access Warning</v-card-title>
+                <v-card-title class="headline deep-orange"> Warning</v-card-title>
                 <v-card-text>{{errorMsg}}</v-card-text>
                 <v-card-actions>
                   <v-spacer></v-spacer>

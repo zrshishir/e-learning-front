@@ -40,8 +40,8 @@
         </template>
         <template >
           <v-form v-for="item in indexData.questions" :key="item.id">
-            <v-container>
-              <v-row >
+            <v-container >
+              <v-row class="grey lighten-2 rounded-pill">
                 <v-col
                   cols="12"
                   md="2"

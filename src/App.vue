@@ -6,13 +6,23 @@
       clipped
       right
     >
-       <v-list dense>
-        <v-list-item @click.stop="right = !right">
+       <v-list dense v-for="(menu, i) in getMenus" :key="i">
+        <v-list-item v-for="(item, index) in menu.items" :key="index" :to="item.link">
           <v-list-item-action>
-            <v-icon>mdi-exit-to-app</v-icon>
+            <v-icon></v-icon>
           </v-list-item-action>
           <v-list-item-content>
-            <v-list-item-title>E-Learning</v-list-item-title>
+            <v-list-item-title>{{item.title}}</v-list-item-title>
+          </v-list-item-content>
+        </v-list-item>
+      </v-list>
+      <v-list dense v-if="isLoggedIn">
+        <v-list-item @click="logout">
+          <v-list-item-action>
+            <v-icon></v-icon>
+          </v-list-item-action>
+          <v-list-item-content>
+            <v-list-item-title>Signout</v-list-item-title>
           </v-list-item-content>
         </v-list-item>
       </v-list>
@@ -30,7 +40,7 @@
       </v-toolbar-title>
       <v-spacer></v-spacer>
 
-      <div v-for="(menu, i) in getMenus" :key="i" class="text-center">
+      <div v-for="(menu, i) in getMenus" :key="i" class="text-center hidden-sm-and-down">
         <v-menu open-on-hover top offset-y>
           <template v-slot:activator="{ on, attrs }">
             <v-btn
@@ -65,13 +75,23 @@
       v-model="drawer"
       app
     >
-      <v-list dense>
-        <v-list-item @click.stop="left = !left">
+      <v-list dense v-for="(menu, i) in getMenus" :key="i">
+        <v-list-item v-for="(item, index) in menu.items" :key="index" :to="item.link">
           <v-list-item-action>
-            <v-icon>mdi-exit-to-app</v-icon>
+            <v-icon></v-icon>
           </v-list-item-action>
           <v-list-item-content>
-            <v-list-item-title>E-Learning</v-list-item-title>
+            <v-list-item-title>{{item.title}}</v-list-item-title>
+          </v-list-item-content>
+        </v-list-item>
+      </v-list>
+      <v-list dense v-if="isLoggedIn">
+        <v-list-item @click="logout">
+          <v-list-item-action>
+            <v-icon></v-icon>
+          </v-list-item-action>
+          <v-list-item-content>
+            <v-list-item-title>Signout</v-list-item-title>
           </v-list-item-content>
         </v-list-item>
       </v-list>
@@ -82,9 +102,7 @@
         class="fill-height"
         fluid
       >
-        
-          <router-view></router-view>
-
+        <router-view></router-view>
       </v-container>
     </v-main>
 
@@ -100,7 +118,7 @@
       color="blue darken-4"
       class="white--text"
     >
-      <span>zrshishir</span>
+      <span>zrshishir@gmail.com</span>
       <v-spacer></v-spacer>
       <span>&copy; 2020</span>
     </v-footer>

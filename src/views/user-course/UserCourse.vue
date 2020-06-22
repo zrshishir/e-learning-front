@@ -1,5 +1,11 @@
 <template>
     <v-container v-if="isLoggedIn">
+      <v-alert type="error" v-if="error == 1">
+            {{errorMsg}}
+          </v-alert>
+          <v-alert type="success" v-if="error == 0">
+            {{errorMsg}}
+          </v-alert>
         <template v-if="! indexData">
             <v-data-table item-key="name" class="elevation-1" loading loading-text="Loading... Please wait"></v-data-table>
         </template>
@@ -192,7 +198,7 @@ import { mapGetters } from 'vuex'
           Object.assign(this.indexData.datas[this.editedIndex], this.editedItem)
         } else {
           this.$store.dispatch('store', [this.apiUrl, this.editedItem])
-          this.indexData.datas.push(this.editedItem)
+          // this.indexData.datas.push(this.editedItem)
         }
         this.close()
       },
