@@ -1,7 +1,10 @@
 <template>
     <v-container v-if="isLoggedIn">
         <template>
-          <v-alert type="error" v-if="error">
+          <v-alert type="error" v-if="error == 1">
+            {{errorMsg}}
+          </v-alert>
+          <v-alert type="success" v-if="error == 2">
             {{errorMsg}}
           </v-alert>
           <v-form>
@@ -50,25 +53,25 @@
                   cols="12"
                   md="2"
                 >
-                <v-checkbox v-model="selected" :label="item.option1" :value="item.option1"></v-checkbox>
+                <v-checkbox v-model="selected[item.id]" :label="item.option1" :value="item.option1"></v-checkbox>
                 </v-col>
                 <v-col
                   cols="12"
                   md="2"
                 >
-                <v-checkbox v-model="selected" :label="item.option2" :value="item.option2"></v-checkbox>
+                <v-checkbox v-model="selected[item.id]" :label="item.option2" :value="item.option2"></v-checkbox>
                 </v-col>
                 <v-col
                   cols="12"
                   md="2"
                 >
-                <v-checkbox v-model="selected" :label="item.option3" :value="item.option3"></v-checkbox>
+                <v-checkbox v-model="selected[item.id]" :label="item.option3" :value="item.option3"></v-checkbox>
                 </v-col>
                 <v-col
                   cols="12"
                   md="2"
                 >
-                <v-checkbox v-model="selected" :label="item.option4" :value="item.option4"></v-checkbox>
+                <v-checkbox v-model="selected[item.id]" :label="item.option4" :value="item.option4"></v-checkbox>
                 </v-col>
                 <v-col
                   cols="12"
@@ -123,8 +126,12 @@ import { mapGetters } from 'vuex'
       apiUrl: 'response',
       alert:true,
       search: '',
-      selected:'',
+      selected:[],
       lessonId: '',
+      editedItem:{
+        question_id: '',
+        response: ''
+      },
       questions:[
             {id: 1, lesson_id:1, question: "q1", option1: "op11", option2: 'op20', option3: 'op30', option4: 'op40'},
             {id: 2, lesson_id:1, question: "q2", option1: "op12", option2: 'op24', option3: 'op31', option4: 'op44'},
@@ -187,18 +194,14 @@ import { mapGetters } from 'vuex'
       },
 
       save (item) {
-        console.log(item.id)
-        console.log(this.selected)
-        const index = this.questions.indexOf(item)
-        this.questions.splice(index, 1)
-        // if (this.editedIndex > -1) {
-        //   this.$store.dispatch('store', [this.apiUrl, this.editedItem])
-        //   Object.assign(this.indexData.datas[this.editedIndex], this.editedItem)
-        // } else {
-        //   this.$store.dispatch('store', [this.apiUrl, this.editedItem])
-        //   this.indexData.datas.push(this.editedItem)
-        // }
-        // this.close()
+        // console.log(item.id)
+        // console.log(this.selected[item.id])
+        this.editedItem.question_id = item.id
+        this.editedItem.response = this.selected[item.id]
+        // console.log(this.editedItem)
+        const index = this.indexData.questions.indexOf(item)
+        this.indexData.questions.splice(index, 1)
+        this.$store.dispatch('responseUpdate', [this.apiUrl, this.editedItem])
       },
     },
   }

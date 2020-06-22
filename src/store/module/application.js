@@ -29,7 +29,7 @@ const actions = {
     async indexData({rootState, commit}, parameters){
         const{ token } = rootState.auth
         const response = await api.fetchAllData(token, parameters[0],parameters[1])
-        commit('setData', response)
+        commit('setAnswerResponse', response)
     },
 
     async setIndexData({rootState, commit}, parameters){
@@ -55,6 +55,12 @@ const actions = {
         const response = await api.getQuestion(token, parameters[0], parameters[1])
         commit('setResponse', response)
     },
+
+    async responseUpdate({rootState, commit}, parameters){
+        const { token } = rootState.auth
+        const response = await api.storeData(token, parameters[0], parameters[1])
+        commit('setAnswerResponse', response)
+    },
     
     setErrorZero({commit}){
         commit('setErrorToZero')
@@ -63,7 +69,7 @@ const actions = {
 }
 
 const mutations = {
-    setData: (state, responseData) => {
+    setAnswerResponse: (state, responseData) => {
         // state.test = responseData
         if(responseData.data.error == 1){
             state.statusCode = responseData.data.statusCode
@@ -73,7 +79,6 @@ const mutations = {
             state.error = responseData.data.error
             state.statusCode = responseData.data.statusCode
             state.errorMsg = responseData.data.errorMsg
-            state.indexData = responseData.data.data.pendingDetails
         }
     },
     setResponse: (state, responseData) => {
