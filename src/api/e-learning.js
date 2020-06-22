@@ -84,8 +84,8 @@ export default{
         })
     },
 
-    getFundingList(token, apiUrl, fundingStatusId){
-        return axios.get(`${ROOT_URL}/${apiUrl}/${fundingStatusId}` , {
+    getQuestion(token, apiUrl, lessonId){
+        return axios.get(`${ROOT_URL}/${apiUrl}/${lessonId}` , {
             headers:{
                 Authorization: `Bearer ${token}`,
                 'Content-Type': 'application/json'

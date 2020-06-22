@@ -39,10 +39,10 @@ const getters = {
         }else{
             return [
                 {
-                    title: 'MCQ Test', items:[
-                        {icon:'face', title: 'MCQ Question', link: '/update-password'},
-                        {icon:'', title: 'Profile2', link: ''},
-                        {icon:'', title: 'Profile3', link: ''}
+                    title: 'My Courses', items:[
+                        {icon:'face', title: 'Course Choice', link: '/user-course'},
+                        {icon:'', title: 'MCQ Test', link: 'response'},
+                        {icon:'', title: 'My Result', link: ''}
                     ]
                 },
             ]

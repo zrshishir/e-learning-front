@@ -7,6 +7,8 @@ import Signup from '../views/auth/Signup'
 import Course from '../views/course/Course'
 import Lesson from '../views/lesson/Lesson'
 import Question from '../views/question/Question'
+import Response from '../views/response/Response'
+import UserCourse from '../views/user-course/UserCourse'
 
 Vue.use(VueRouter)
 
@@ -23,6 +25,12 @@ Vue.use(VueRouter)
     { path: '/lesson', name: 'Lesson', component: Lesson},
     //question
     { path: '/question', name: 'Question', component: Question},
+
+    //question
+    { path: '/response', name: 'Response', component: Response},
+
+    //question
+    { path: '/user-course', name: 'UserCourse', component: UserCourse},
 ]
 
 const router = new VueRouter({

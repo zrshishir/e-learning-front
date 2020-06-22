@@ -1,5 +1,5 @@
 import api from '../../api/e-learning'
-import router from '../../router';
+// import router from '../../router';
 
 const state = {
     error: '',
@@ -44,21 +44,16 @@ const actions = {
         commit('setResponse', response)
         // router.push('/task')
     },
-    async update({rootState, commit}, updateData){
-        const { token } = rootState.auth
-        const response = await api.updateData(token, updateData.id, updateData, 'task')
-        commit('setData', response)
-        router.push('/task')
-    },
+    
     async delete({rootState, commit}, parameters){
         const { token } = rootState.auth
         const response = await api.deleteData(token, parameters[0], parameters[1])
         commit('setResponse', response)
     },
-    async changeStatus({rootState, commit}, parameters){
+    async getLessonQuestion({rootState, commit}, parameters){
         const { token } = rootState.auth
-        const response = await api.changeDataStatus(token, parameters[0], parameters[1])
-        commit('setData', response)
+        const response = await api.getQuestion(token, parameters[0], parameters[1])
+        commit('setResponse', response)
     },
     
     setErrorZero({commit}){
